@@ -1,5 +1,5 @@
 ---
-title: How to query for empty arrays in Hasura.
+title: How to query for empty arrays using Hasura.
 date: "2018-09-01"
 featuredImage: './featured.webp'
 ---
@@ -7,8 +7,6 @@ featuredImage: './featured.webp'
 Hasura filters are really comprehensive. However when it comes to Postgres types like arrays, it gets a little bit hard to query data. In this post I want to show you how to query for empty arrays using Hasura.io.
 
 <!-- end -->
-
-Hasura filters are really comprehensive. However when it comes to Postgres types like arrays, it gets a little bit hard to query data. In this post I want to show you how to query for empty arrays using Hasura.io.
 
 ## Data Examples
 
