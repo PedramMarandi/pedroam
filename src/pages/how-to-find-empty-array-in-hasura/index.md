@@ -1,14 +1,14 @@
 ---
-title: How to find empty arrays in Hasura queries.
+title: How to query for empty arrays in Hasura.
 date: "2018-09-01"
 featuredImage: './featured.webp'
 ---
 
-Hasura filters are great. However when it comes to Postgres types, it gets a little bit hard to query them. In this post I'll show you how to find all empty arrays in database.
+Hasura filters are really comprehensive. However when it comes to Postgres types like arrays, it gets a little bit hard to query data. In this post I want to show you how to query for empty arrays using Hasura.io.
 
 <!-- end -->
 
-Hasura filters are great. However when it comes to Postgres types, it gets a little bit hard to query them. In this post I'll show you how to find all empty arrays in database.
+Hasura filters are really comprehensive. However when it comes to Postgres types like arrays, it gets a little bit hard to query data. In this post I want to show you how to query for empty arrays using Hasura.io.
 
 ## Data Examples
 
@@ -22,9 +22,9 @@ CREATE TABLE posts (
 
 So we have a table called `posts` which has a column representing an array of strings which is called `tags`.
 
-### Find all posts having no tag
+## Find all posts having empty tags
 
-Arrays in Postgres will be saved in this format `{tag1, tag2}`. So an empty array will be stored as `{}` in the database.
+In Postgres, arrays are being saved in this format `{tag1, tag2}`. So an empty array will be stored as `{}` in the database. So we can use `_eq` and `{}` together like the below example:
 
 ```graphql
 query {

@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Pedroam | Javascript Developer]]></title><description><![CDATA[Full-stack Web Developer]]></description><link>https://pedroam.dev</link><generator>RSS for Node</generator><lastBuildDate>Sun, 01 Sep 2019 13:50:18 GMT</lastBuildDate><item><title><![CDATA[How to find empty arrays in Hasura queries.]]></title><description><![CDATA[
-Hasura filters are great. However when it comes to Postgres types, it gets a little bit hard to query them. In this post I'll show you how to find all empty arrays in database.
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Pedroam | Javascript Developer]]></title><description><![CDATA[Full-stack Web Developer]]></description><link>https://pedroam.dev</link><generator>RSS for Node</generator><lastBuildDate>Sun, 01 Sep 2019 14:01:26 GMT</lastBuildDate><item><title><![CDATA[How to query for empty arrays in Hasura.]]></title><description><![CDATA[
+Hasura filters are really comprehensive. However when it comes to Postgres types like arrays, it gets a little bit hard to query data. In this post I want to show you how to query for empty arrays using Hasura.io.
 
-]]></description><link>https://pedroam.dev/how-to-find-empty-array-in-hasura/</link><guid isPermaLink="false">https://pedroam.dev/how-to-find-empty-array-in-hasura/</guid><pubDate>Sat, 01 Sep 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Hasura filters are great. However when it comes to Postgres types, it gets a little bit hard to query them. In this post I’ll show you how to find all empty arrays in database.&lt;/p&gt;
+]]></description><link>https://pedroam.dev/how-to-find-empty-array-in-hasura/</link><guid isPermaLink="false">https://pedroam.dev/how-to-find-empty-array-in-hasura/</guid><pubDate>Sat, 01 Sep 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Hasura filters are really comprehensive. However when it comes to Postgres types like arrays, it gets a little bit hard to query data. In this post I want to show you how to query for empty arrays using Hasura.io.&lt;/p&gt;
 &lt;!-- end --&gt;
-&lt;p&gt;Hasura filters are great. However when it comes to Postgres types, it gets a little bit hard to query them. In this post I’ll show you how to find all empty arrays in database.&lt;/p&gt;
+&lt;p&gt;Hasura filters are really comprehensive. However when it comes to Postgres types like arrays, it gets a little bit hard to query data. In this post I want to show you how to query for empty arrays using Hasura.io.&lt;/p&gt;
 &lt;h2&gt;Data Examples&lt;/h2&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sql&quot;&gt;&lt;pre class=&quot;language-sql&quot;&gt;&lt;code class=&quot;language-sql&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;TABLE&lt;/span&gt; posts &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
     title            &lt;span class=&quot;token keyword&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
@@ -11,76 +11,10 @@ Hasura filters are great. However when it comes to Postgres types, it gets a lit
     tags             &lt;span class=&quot;token keyword&quot;&gt;varchar&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;So we have a table called &lt;code class=&quot;language-text&quot;&gt;posts&lt;/code&gt; which has a column representing an array of strings which is called &lt;code class=&quot;language-text&quot;&gt;tags&lt;/code&gt;.&lt;/p&gt;
-&lt;h3&gt;Find all posts having no tag&lt;/h3&gt;
-&lt;p&gt;Arrays in Postgres will be saved in this format &lt;code class=&quot;language-text&quot;&gt;{tag1, tag2}&lt;/code&gt;. So an empty array will be stored as &lt;code class=&quot;language-text&quot;&gt;{}&lt;/code&gt; in the database.&lt;/p&gt;
+&lt;h2&gt;Find all posts having empty tags&lt;/h2&gt;
+&lt;p&gt;In Postgres, arrays are being saved in this format &lt;code class=&quot;language-text&quot;&gt;{tag1, tag2}&lt;/code&gt;. So an empty array will be stored as &lt;code class=&quot;language-text&quot;&gt;{}&lt;/code&gt; in the database. So we can use &lt;code class=&quot;language-text&quot;&gt;_eq&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;{}&lt;/code&gt; together like the below example:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;graphql&quot;&gt;&lt;pre class=&quot;language-graphql&quot;&gt;&lt;code class=&quot;language-graphql&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;query&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   posts&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token attr-name&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;tags&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;_eq&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;{}&quot;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
     title
   &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Welcome to the Blog!]]></title><description><![CDATA[
-Welcome to the new blog, I hope you enjoy your stay! This is an example of how you can control what excerpt shows up.
-
-]]></description><link>https://pedroam.dev/welcome-to-the-blog/</link><guid isPermaLink="false">https://pedroam.dev/welcome-to-the-blog/</guid><pubDate>Sun, 01 Jul 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Welcome to the new blog, I hope you enjoy your stay! This is an example of how you can control what excerpt shows up.&lt;/p&gt;
-&lt;!-- end --&gt;
-&lt;h2&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit&lt;/h2&gt;
-&lt;p&gt;Sed urna justo, scelerisque consectetur pharetra vitae, facilisis vel diam. Maecenas auctor enim a volutpat mattis. Morbi sit amet turpis a purus ornare pellentesque sit amet et ipsum. Suspendisse imperdiet mi at felis aliquet, nec consectetur arcu dignissim. Sed vitae diam maximus, maximus diam ac, scelerisque mi.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Morbi sit amet turpis a purus&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Etiam tempor ultricies mi&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Maecenas auctor enim a volutpat mattis&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Sed urna justo, scelerisque consectetur pharetra vitae&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Nam nec augue vel nisl placerat faucibus. Donec congue &lt;strong&gt;nulla quis nunc&lt;/strong&gt; sagittis placerat. Pellentesque non tincidunt velit, cursus porttitor tellus. Suspendisse pulvinar tortor at &lt;em&gt;augue aliquam sagittis&lt;/em&gt;. Duis non pulvinar augue. Ut tristique dignissim ligula, eget tempus diam molestie non. Nulla ultrices eleifend rutrum. Mauris convallis sollicitudin dui, pulvinar suscipit velit. Maecenas viverra finibus metus vitae blandit.&lt;/p&gt;
-&lt;h3&gt;Pellentesque consectetur facilisis venenatis&lt;/h3&gt;
-&lt;p&gt;Nam ullamcorper, orci nec tempor hendrerit, lorem nunc laoreet diam, vel gravida sem mi quis augue. Nunc odio velit, facilisis quis dictum non, facilisis quis felis. Vivamus &lt;a href=&quot;https://google.com&quot;&gt;elementum dapibus nibh&lt;/a&gt;, eget aliquet nunc luctus maximus. Sed finibus risus eget ultrices maximus. Aliquam commodo consectetur diam eget tristique. Nunc quis erat quis felis fringilla tempus. Cras tempor nibh dolor, ac lacinia lacus ultrices eu.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Quisque tempor nulla turpis, ut placerat arcu lobortis nec. Aenean sed vehicula nisi. Nullam vitae placerat enim. Etiam hendrerit enim vel tempor fermentum. Morbi rutrum euismod ipsum a luctus.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Morbi et libero id metus tempor imperdiet eget non mi. Mauris pulvinar quis enim at placerat. Vestibulum vitae dapibus lectus, ut elementum est.&lt;/p&gt;
-&lt;h3&gt;Pellentesque facilisis venenatis mi, sit amet molestie nisl ornare et&lt;/h3&gt;
-&lt;p&gt;Morbi posuere facilisis eros vel euismod. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam malesuada dapibus dolor non cursus. Sed in turpis justo. Cras sed hendrerit nulla. Sed ornare, leo et suscipit tincidunt, justo diam sollicitudin risus, vitae vulputate nulla augue et lacus.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Morbi posuere facilisis&lt;/li&gt;
-&lt;li&gt;Pellentesque habitant morbi tristique&lt;/li&gt;
-&lt;li&gt;Etiam malesuada dapibus&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Ut vel ligula ante. Proin quis metus magna. Nulla nec dui vulputate, semper orci in, sagittis dolor. Mauris dictum neque non fermentum consectetur. Integer vel pellentesque ex, ut tincidunt quam.&lt;/p&gt;
-&lt;h4&gt;Sed ac orci a dolor venenatis vulputate&lt;/h4&gt;
-&lt;p&gt;Sed sollicitudin, turpis ac malesuada dapibus, magna dui semper orci, in congue justo felis quis ante. Phasellus consequat et dolor fringilla accumsan. Pellentesque ullamcorper porttitor dolor et imperdiet.&lt;/p&gt;
-&lt;p&gt;
-  &lt;span
-    class=&quot;gatsby-resp-image-wrapper&quot;
-    style=&quot;position: relative; display: block; margin: 15px -30px !important max-width: 700px; margin-left: auto; margin-right: auto;&quot;
-  &gt;
-    &lt;span
-      class=&quot;gatsby-resp-image-background-image&quot;
-      style=&quot;padding-bottom: 53.125%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAALABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAQBAgb/xAAWAQEBAQAAAAAAAAAAAAAAAAABAgP/2gAMAwEAAhADEAAAAbqy6xnR8NP/xAAaEAEAAwADAAAAAAAAAAAAAAABAAIDEiEx/9oACAEBAAEFAq1z0NcGs7mK8nywL//EABgRAAIDAAAAAAAAAAAAAAAAAAABERJR/9oACAEDAQE/AbaQj//EABURAQEAAAAAAAAAAAAAAAAAABAS/9oACAECAQE/AaP/xAAbEAACAQUAAAAAAAAAAAAAAAAAEQECICEycf/aAAgBAQAGPwLRcHTLsyf/xAAbEAADAAIDAAAAAAAAAAAAAAAAAREhMUFh4f/aAAgBAQABPyHbjdj3EHDjOc2O3TKpMn//2gAMAwEAAgADAAAAEFTv/8QAFxEAAwEAAAAAAAAAAAAAAAAAAAERIf/aAAgBAwEBPxBQ5oof/8QAFhEAAwAAAAAAAAAAAAAAAAAAAAER/9oACAECAQE/EG1Kf//EABwQAQACAgMBAAAAAAAAAAAAAAEAESFhMUFRof/aAAgBAQABPxBm7Gg+x9VTDWAebjcjZ6Qgz6OyGUtRzEJVcvE//9k=&apos;); background-size: cover; display: block;&quot;
-    &gt;
-      &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
-        alt=&quot;Space&quot;
-        title=&quot;&quot;
-        src=&quot;/static/a36bdd86f732bc910b6582d29adae291/67d4f/space.jpg&quot;
-        srcset=&quot;/static/a36bdd86f732bc910b6582d29adae291/3cfb5/space.jpg 175w,
-/static/a36bdd86f732bc910b6582d29adae291/3a2a3/space.jpg 350w,
-/static/a36bdd86f732bc910b6582d29adae291/67d4f/space.jpg 700w,
-/static/a36bdd86f732bc910b6582d29adae291/a296c/space.jpg 800w&quot;
-        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
-      /&gt;
-    &lt;/span&gt;
-  &lt;/span&gt;
-  &lt;/p&gt;
-&lt;p&gt;Pellentesque consectetur facilisis venenatis. Nam ullamcorper, orci nec tempor hendrerit, lorem nunc laoreet diam, vel gravida sem mi quis augue. Nunc odio velit, facilisis quis dictum non, facilisis quis felis. Vivamus elementum dapibus nibh, eget aliquet nunc luctus maximus. Sed finibus risus eget ultrices maximus. Aliquam commodo consectetur diam eget tristique. Nunc quis erat quis felis fringilla tempus. Cras tempor nibh dolor, ac lacinia lacus ultrices eu.&lt;/p&gt;
-&lt;h5&gt;Nulla nec dui vulputate, semper orci in, sagittis dolor&lt;/h5&gt;
-&lt;p&gt;Mauris dictum neque non fermentum consectetur. Integer vel pellentesque ex, ut tincidunt quam. Sed ac orci a dolor venenatis vulputate. Sed sollicitudin, turpis ac malesuada dapibus, magna dui semper orci, in congue justo felis quis ante. Phasellus consequat et dolor fringilla accumsan. Pellentesque ullamcorper porttitor dolor et imperdiet.&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token function&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;document&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;ready&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;More jQuery, wow!&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h6&gt;ras aliquet ipsum ut enim pellentesque, id varius quam placerat&lt;/h6&gt;
-&lt;p&gt;Maecenas non scelerisque leo. Sed id purus fringilla, consequat magna non, faucibus neque. Cras ornare nisi a lectus ultricies convallis. Integer tristique dictum eros, et elementum ante consectetur eget. Phasellus sollicitudin est vestibulum suscipit pellentesque. Duis in eros cursus magna laoreet aliquam vel a lectus. Nulla ut nisi vitae ipsum sollicitudin vestibulum. Aenean sit amet mattis odio. Vestibulum ultrices sed ipsum nec pretium. Integer non turpis nunc. Praesent tincidunt tincidunt alique&lt;/p&gt;
-&lt;p&gt;Integer mollis dolor non libero placerat, ut efficitur nisi ultricies. Etiam ac lacinia urna, eget ornare nunc. Suspendisse eget eros id turpis gravida semper. Duis ornare lorem et est pellentesque, quis rhoncus leo vestibulum. Nullam eu nulla ut elit rutrum iaculis. Cras a laoreet elit, in aliquet erat. Sed interdum varius posuere. Pellentesque eget luctus erat. Nam quis sem in ligula efficitur bibendum.&lt;/p&gt;</content:encoded></item></channel></rss>
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item></channel></rss>
