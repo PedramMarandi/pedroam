@@ -1,14 +1,12 @@
 import Helmet from 'react-helmet';
 import React from 'react';
-
 import userConfig from '../../config';
-
 import Layout from './layout';
-
 import Card from '../components/Card';
 import Container from '../components/Container';
 import Pagination from '../components/Pagination';
 import Summary from '../components/Summary';
+import CoverImage from './../cover.png'
 
 const IndexPage = ({ pageContext }) => {
   const { group, index, pageCount } = pageContext;
@@ -30,13 +28,13 @@ const IndexPage = ({ pageContext }) => {
 <meta property="og:url" content="https://pedroam.dev"/>
 <meta property="og:title" content={`${userConfig.title} | ${userConfig.author}`}/>
 <meta property="og:description" content={`${userConfig.title} | ${userConfig.description}`}/>
-<meta property="og:image" content="https://i.ibb.co/mT61pmk/Artboard.png"/>
+<meta property="og:image" content={`${userConfig.siteUrl}/${CoverImage}`}/>
 
 <meta property="twitter:card" content="summary_large_image"/>
 <meta property="twitter:url" content="https://pedroam.dev/"/>
 <meta property="twitter:title" content={`${userConfig.title} | ${userConfig.author}`}/>
 <meta property="twitter:description" content={`${userConfig.title} | ${userConfig.description}`}/>
-<meta property="twitter:image" content="https://i.ibb.co/mT61pmk/Artboard.png"/>
+<meta property="twitter:image" content={`${userConfig.siteUrl}/${CoverImage}`}/>
         </Helmet>
         {group.map(({ node }) => (
           <Card key={node.fields.slug}>
