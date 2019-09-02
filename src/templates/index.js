@@ -30,13 +30,13 @@ const IndexPage = ({ pageContext }) => {
 <meta property="og:url" content="https://pedroam.dev/"/>
 <meta property="og:title" content={`${userConfig.title} | ${userConfig.author}`}/>
 <meta property="og:description" content={`${userConfig.title} | ${userConfig.description}`}/>
-<meta property="og:image" content="https://metatags.io/assets/meta-tags-16a33a6a8531e519cc0936fbba0ad904e52d35f34a46c97a2c9f6f7dd7d336f2.png"/>
+<meta property="og:image" content="https://i.ibb.co/mT61pmk/Artboard.png"/>
 
 <meta property="twitter:card" content="summary_large_image"/>
 <meta property="twitter:url" content="https://pedroam.dev/"/>
 <meta property="twitter:title" content={`${userConfig.title} | ${userConfig.author}`}/>
 <meta property="twitter:description" content={`${userConfig.title} | ${userConfig.description}`}/>
-<meta property="twitter:image" content="https://metatags.io/assets/meta-tags-16a33a6a8531e519cc0936fbba0ad904e52d35f34a46c97a2c9f6f7dd7d336f2.png"/>
+<meta property="twitter:image" content="https://i.ibb.co/mT61pmk/Artboard.png"/>
         </Helmet>
         {group.map(({ node }) => (
           <Card key={node.fields.slug}>
