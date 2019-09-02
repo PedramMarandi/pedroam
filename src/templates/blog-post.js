@@ -2,11 +2,8 @@ import { graphql } from "gatsby";
 import Helmet from "react-helmet";
 import get from "lodash/get";
 import React from "react";
-
 import userConfig from "../../config";
-
 import Layout from "./layout";
-
 import Article from "../components/Article";
 import ArticleHeader from "../components/ArticleHeader";
 import Button from "../components/Button";
@@ -15,6 +12,7 @@ import Container from "../components/Container";
 import FeaturedImage from "../components/FeaturedImage";
 import PageNav from "../components/PageNav";
 import Share from "../components/Share";
+import CoverImage from './../cover.png';
 
 class BlogPostTemplate extends React.Component {
   render() {
@@ -39,13 +37,13 @@ class BlogPostTemplate extends React.Component {
 <meta property="og:url" content={`https://pedroam.dev/${post.fields.slug}`}/>
 <meta property="og:title" content={`${post.frontmatter.title} | ${userConfig.title}`}/>
 <meta property="og:description" content={post.excerpt}/>
-<meta property="og:image" content="https://i.ibb.co/mT61pmk/Artboard.png"/>
+<meta property="og:image" content={`${userConfig.siteUrl}/${CoverImage}`}/>
 
 <meta property="twitter:card" content="summary_large_image"/>
 <meta property="twitter:url" content={`https://pedroam.dev/${post.fields.slug}`}/>
 <meta property="twitter:title"  content={`${post.frontmatter.title} | ${userConfig.title}`}/>
 <meta property="twitter:description"  content={post.excerpt}/>
-<meta property="twitter:image" content="https://i.ibb.co/mT61pmk/Artboard.png"/>
+<meta property="twitter:image" content={`${userConfig.siteUrl}/${CoverImage}`}/>
           </Helmet>
           <Card>
             <ArticleHeader>
