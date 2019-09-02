@@ -56,7 +56,7 @@ const Article = styled.article`
 
   p {
     line-height: 1.7;
-    margin: 15px 50px;
+    margin: 15px 10px;
   }
 
   blockquote {
