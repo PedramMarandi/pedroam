@@ -1,5 +1,6 @@
 ---
 title: How to query for empty arrays using Hasura.
+tags: ["hasura"]
 date: "2018-09-01"
 featuredImage: './featured.webp'
 ---
@@ -18,7 +19,7 @@ CREATE TABLE posts (
 );
 ```
 
-So we have a table called `posts` which has a column representing an array of strings which is called `tags`.
+So we have a table called `posts` which has the column `tags` representing an array of strings.
 
 ## Find all posts having empty tags
 
