@@ -23,7 +23,7 @@ So we have a table called `posts` which has the column `tags` representing an ar
 
 ## Find all posts having empty tags
 
-In Postgres, arrays are being saved in this format `{tag1, tag2}`. So an empty array will be stored as `{}` in the database. So we can use `_eq` and `{}` together like the below example:
+In Postgres, arrays are being saved in this format `{tag1, tag2}`. So an empty array will be stored as `{}` in the database. That means can use the below query to find all of our empty arrays: 
 
 ```graphql
 query {
