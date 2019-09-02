@@ -27,7 +27,7 @@ const IndexPage = ({ pageContext }) => {
           />
 
 <meta property="og:type" content="website"/>
-<meta property="og:url" content="https://pedroam.dev/"/>
+<meta property="og:url" content="https://pedroam.dev"/>
 <meta property="og:title" content={`${userConfig.title} | ${userConfig.author}`}/>
 <meta property="og:description" content={`${userConfig.title} | ${userConfig.description}`}/>
 <meta property="og:image" content="https://i.ibb.co/mT61pmk/Artboard.png"/>
